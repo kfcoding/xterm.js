@@ -85,7 +85,8 @@ export function attach(term: Terminal, socket: WebSocket, bidirectional: boolean
     if (socket.readyState !== 1) {
       return;
     }
-    socket.send(data);
+    let newData = JSON.stringify({Op: 'stdin', data: data});
+    socket.send(newData);
   };
 
   socket.addEventListener('message', addonTerminal.__getMessage);
